@@ -11,7 +11,7 @@
     <!-- Google Fonts: Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght=0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300&display=swap" rel="stylesheet">
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -40,22 +40,20 @@
         body {
             font-family: 'Poppins', sans-serif;
             -webkit-font-smoothing: antialiased;
-            background-color: #E9ECEF;
+            background: radial-gradient(circle at top right, #F8F9FA 0%, #E9ECEF 100%);
+            overflow-x: hidden;
         }
 
         /* Animación suave heredada de tu web principal */
-        .levitate { animation: levitate 5s ease-in-out infinite; }
+        .levitate { animation: levitate 6s ease-in-out infinite; }
         @keyframes levitate { 
-            0%, 100% { transform: translateY(0); } 
-            50% { transform: translateY(-10px); } 
+            0%, 100% { transform: translateY(0) rotate(0deg); } 
+            50% { transform: translateY(-8px) rotate(1deg); } 
         }
 
-        /* Cortes diagonales en capas para el nuevo header */
+        /* Cortes diagonales para el header de la tarjeta */
         .clip-header {
-            clip-path: polygon(0 0, 100% 0, 100% 75%, 0% 100%);
-        }
-        .clip-header-shadow {
-            clip-path: polygon(0 0, 100% 0, 100% 83%, 0% 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 88%, 0% 100%);
         }
 
         /* Estilo para la barra de scroll */
@@ -64,65 +62,69 @@
         ::-webkit-scrollbar-thumb { background: #FF6A00; border-radius: 10px; }
     </style>
 </head>
-<body class="flex justify-center min-h-screen items-center p-0 sm:p-4">
+<body class="flex justify-center items-center min-h-screen p-0 sm:p-6 relative">
 
-    <!-- Contenedor Principal estilo Teléfono Móvil -->
-    <div class="w-full max-w-[400px] bg-white min-h-screen sm:min-h-[auto] sm:rounded-[40px] shadow-2xl relative overflow-hidden flex flex-col border-0 sm:border-8 border-brand-textDark">
+    <!-- Contenedor Principal de la Tarjeta Móvil (vCard) -->
+    <div class="w-full max-w-[420px] bg-white min-h-screen sm:min-h-[auto] sm:rounded-[40px] shadow-[0_25px_60px_rgba(0,0,0,0.12)] relative overflow-hidden flex flex-col border-0 sm:border-[6px] border-brand-textDark z-10">
         
-        <!-- ================= REDISEÑO DEL HEADER ================= -->
-        <div class="relative h-[220px]">
-            <!-- Capa Naranja (Corte inferior para dar el acento de la marca) -->
-            <div class="absolute inset-0 bg-brand-accent clip-header-shadow"></div>
-            
-            <!-- Capa Principal Clara (Donde descansa el logo) -->
-            <div class="absolute inset-0 bg-brand-light clip-header overflow-hidden border-b border-brand-gray/20">
-                <!-- Textura/Gradiente sutil para que no sea un color plano -->
-                <div class="absolute inset-0 bg-gradient-to-br from-white to-brand-gray/60"></div>
-                <!-- Destello naranja muy suave en la esquina superior para armonizar -->
-                <div class="absolute -top-16 -right-16 w-48 h-48 bg-brand-accent/10 rounded-full blur-3xl"></div>
-            </div>
-            
-            <!-- Logo con contraste perfecto -->
-            <div class="relative z-10 flex justify-center items-start pt-14 h-full">
-                <img src="https://www.image2url.com/r2/default/images/1783443251633-c2d56297-30d4-4ac8-8d74-7e9f2b2d6681.png" class="h-12 drop-shadow-md" alt="EQB STUDIO Logo">
-            </div>
-        </div>
-        <!-- ===================================================== -->
-
-        <!-- Foto de Perfil (Mascota) -->
-        <div class="flex justify-center -mt-24 relative z-20">
-            <div class="w-32 h-32 bg-white rounded-full border-[6px] border-white shadow-[0_10px_25px_rgba(0,0,0,0.1)] overflow-hidden flex items-center justify-center p-2 relative group">
-                <!-- Fondo interno de la mascota -->
-                <div class="absolute inset-0 bg-gradient-to-b from-brand-light to-brand-gray/40 rounded-full"></div>
-                <img src="https://www.image2url.com/r2/default/images/1782571037969-5dcdb824-91fd-43d8-b539-cfe0894386ca.png" alt="Eqbito Mascota" class="w-full h-full object-contain relative z-10 levitate">
-            </div>
+        <!-- Mascota en el fondo de los botones (Marca de agua sutil interna) -->
+        <div class="absolute inset-x-0 bottom-28 flex justify-center pointer-events-none opacity-[0.06] z-0">
+            <img src="https://www.image2url.com/r2/default/images/1782571037969-5dcdb824-91fd-43d8-b539-cfe0894386ca.png" alt="Eqbito Marca de Agua" class="w-[280px] h-auto object-contain">
         </div>
 
-        <!-- Información de Marca -->
-        <div class="text-center px-6 mt-5">
+        <!-- ================= NUEVA PORTADA CON LA MASCOTA INTEGRADA ================= -->
+        <!-- Header Diagonal con Mascota como Portada -->
+        <div class="relative h-56 bg-brand-textDark clip-header flex justify-center items-start overflow-hidden">
+            <!-- Efecto de iluminación naranja en el header -->
+            <div class="absolute w-[220px] h-[220px] bg-brand-accent/30 blur-[50px] rounded-full -top-10 left-1/2 transform -translate-x-1/2 pointer-events-none z-0"></div>
+            
+            <!-- Mascota colocada dentro del recuadro como portada -->
+            <div class="absolute inset-x-0 bottom-3 flex justify-center items-end z-10 h-full max-h-[85%] select-none">
+                <img src="https://www.image2url.com/r2/default/images/1782571037969-5dcdb824-91fd-43d8-b539-cfe0894386ca.png" alt="Eqbito Portada" class="w-auto h-full object-contain levitate drop-shadow-[0_10px_20px_rgba(255,106,0,0.2)]">
+            </div>
+
+            <!-- Etiqueta superior sobre la portada -->
+            <div class="relative z-20 text-center pt-6">
+                <span class="text-[9px] text-brand-accent font-black uppercase tracking-[0.25em] bg-brand-textDark/80 py-1 px-3.5 rounded-full border border-white/10 backdrop-blur-sm">Tarjeta de Contacto</span>
+            </div>
+        </div>
+        <!-- ========================================================================= -->
+
+        <!-- Foto de Perfil Central: Logo de EQB STUDIO (Sobre la portada) -->
+        <div class="flex justify-center -mt-16 relative z-30">
+            <div class="w-28 h-28 bg-white rounded-full border-[5px] border-white shadow-[0_10px_25px_rgba(0,0,0,0.15)] overflow-hidden flex items-center justify-center p-4 relative transition-transform hover:scale-105 duration-300">
+                <!-- Fondo interno con gradiente suave -->
+                <div class="absolute inset-0 bg-gradient-to-tr from-brand-light to-white"></div>
+                <!-- Logo principal nítido y centrado -->
+                <img src="https://www.image2url.com/r2/default/images/1783443251633-c2d56297-30d4-4ac8-8d74-7e9f2b2d6681.png" alt="EQB Logo" class="w-full h-full object-contain relative z-10">
+            </div>
+        </div>
+
+        <!-- Información de Presentación -->
+        <div class="text-center px-6 mt-4 relative z-10">
             <h1 class="text-3xl font-black uppercase tracking-tight text-brand-textDark">EQB STUDIO</h1>
             <p class="text-[11px] text-brand-accent font-black uppercase tracking-[0.2em] mt-1">Desarrollo Digital & Creativo</p>
-            <p class="text-sm font-semibold text-brand-textSoft mt-4 leading-relaxed">
-                Diseñamos con propósito e innovamos con pasión. Impulsamos tu negocio en el entorno digital.
+            <p class="text-sm font-semibold text-brand-textSoft mt-4 leading-relaxed max-w-[320px] mx-auto">
+                Diseñamos con propósito e innovamos con pasión. Impulsamos tu negocio con ecosistemas digitales de alto impacto.
             </p>
         </div>
 
         <!-- Botones de Redes y Enlaces -->
-        <div class="px-6 mt-8 space-y-4 flex-grow pb-24">
+        <div class="px-6 mt-8 space-y-4 flex-grow pb-28 relative z-10">
             
-            <!-- Botón WhatsApp (Destacado) -->
+            <!-- Botón WhatsApp (Destacado en Naranja Brand) -->
             <a href="https://wa.me/573021192800" target="_blank" class="w-full bg-brand-accent text-white border-2 border-brand-accent hover:bg-brand-accentHover transition-transform transform hover:-translate-y-1 rounded-2xl p-4 flex items-center justify-between shadow-lg shadow-brand-accent/30 group">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
                         <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                     </div>
-                    <span class="text-sm font-black uppercase tracking-widest text-left leading-tight">Chatear <br> en WhatsApp</span>
+                    <span class="text-sm font-black uppercase tracking-widest text-left leading-tight">Chatear en<br>WhatsApp</span>
                 </div>
                 <svg class="w-6 h-6 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
             </a>
 
-            <!-- Botón Web -->
-            <a href="https://eqbstudio.vercel.app" target="_blank" class="w-full bg-brand-light border-2 border-brand-gray text-brand-textDark hover:bg-brand-textDark hover:border-brand-textDark hover:text-white transition-all transform hover:-translate-y-1 rounded-2xl p-4 flex items-center justify-between group">
+            <!-- Botón Web Oficial (Borde Negro/Gris Premium) -->
+            <a href="https://eqbstudio.vercel.app" target="_blank" class="w-full bg-white border-2 border-brand-gray text-brand-textDark hover:bg-brand-textDark hover:border-brand-textDark hover:text-white transition-all transform hover:-translate-y-1 rounded-2xl p-4 flex items-center justify-between group">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 bg-brand-gray/50 group-hover:bg-white/10 rounded-full flex items-center justify-center transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
@@ -133,7 +135,7 @@
             </a>
 
             <!-- Botón Instagram -->
-            <a href="https://www.instagram.com/eqbstudio/" target="_blank" class="w-full bg-brand-light border-2 border-brand-gray text-brand-textDark hover:bg-brand-textDark hover:border-brand-textDark hover:text-white transition-all transform hover:-translate-y-1 rounded-2xl p-4 flex items-center justify-between group">
+            <a href="https://www.instagram.com/eqbstudio/" target="_blank" class="w-full bg-white border-2 border-brand-gray text-brand-textDark hover:bg-brand-textDark hover:border-brand-textDark hover:text-white transition-all transform hover:-translate-y-1 rounded-2xl p-4 flex items-center justify-between group">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 bg-brand-gray/50 group-hover:bg-white/10 rounded-full flex items-center justify-center transition-colors">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
@@ -144,7 +146,7 @@
             </a>
 
             <!-- Botón Facebook -->
-            <a href="https://www.facebook.com/eqbstudio" target="_blank" class="w-full bg-brand-light border-2 border-brand-gray text-brand-textDark hover:bg-brand-textDark hover:border-brand-textDark hover:text-white transition-all transform hover:-translate-y-1 rounded-2xl p-4 flex items-center justify-between group">
+            <a href="https://www.facebook.com/eqbstudio" target="_blank" class="w-full bg-white border-2 border-brand-gray text-brand-textDark hover:bg-brand-textDark hover:border-brand-textDark hover:text-white transition-all transform hover:-translate-y-1 rounded-2xl p-4 flex items-center justify-between group">
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 bg-brand-gray/50 group-hover:bg-white/10 rounded-full flex items-center justify-center transition-colors">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
@@ -156,14 +158,45 @@
 
         </div>
 
-        <!-- Botón Inferior Fijo (Guardar Contacto) -->
-        <div class="absolute bottom-0 left-0 w-full bg-white border-t border-brand-gray p-4">
-            <button onclick="alert('Esta función puede generar y descargar un archivo .vcf con JS si lo deseas')" class="w-full bg-brand-textDark text-white py-3.5 font-black tracking-widest uppercase text-xs hover:bg-black transition-colors rounded-xl flex items-center justify-center gap-2">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+        <!-- Botón Inferior Fijo (Guardar Contacto - Funcional) -->
+        <div class="absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur-md border-t border-brand-gray p-4 z-20">
+            <button onclick="downloadVCard()" class="w-full bg-brand-textDark text-white py-3.5 font-black tracking-widest uppercase text-xs hover:bg-black hover:scale-[1.02] active:scale-[0.98] transition-all rounded-xl flex items-center justify-center gap-2 shadow-lg">
+                <svg class="w-5 h-5 text-brand-accent" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
                 Guardar Contacto
             </button>
         </div>
 
     </div>
+
+    <!-- Script para descargar VCF real -->
+    <script>
+        function downloadVCard() {
+            // Genera la información en formato estándar vCard (.vcf)
+            const vcardData = [
+                'BEGIN:VCARD',
+                'VERSION:3.0',
+                'N:STUDIO;EQB;;;',
+                'FN:EQB STUDIO',
+                'ORG:EQB STUDIO',
+                'TITLE:Desarrollo Digital & Creativo',
+                'TEL;TYPE=CELL,VOICE;waid=573021192800:+57 302 1192800',
+                'URL;TYPE=WORK:https://eqbstudio.vercel.app',
+                'X-SOCIALPROFILE;type=instagram:https://instagram.com/eqbstudio',
+                'X-SOCIALPROFILE;type=facebook:https://facebook.com/eqbstudio',
+                'NOTE:Diseñamos con propósito e innovamos con pasión. Impulsamos tu negocio en el entorno digital.',
+                'END:VCARD'
+            ].join('\n');
+
+            const blob = new Blob([vcardData], { type: 'text/vcard;charset=utf-8' });
+            
+            // Creación de descarga compatible para móvil y desktop
+            const link = document.createElement('a');
+            link.href = window.URL.createObjectURL(blob);
+            link.setAttribute('download', 'EQB_STUDIO.vcf');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    </script>
 </body>
 </html>
